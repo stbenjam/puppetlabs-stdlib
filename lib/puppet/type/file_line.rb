@@ -46,7 +46,7 @@ Puppet::Type.newtype(:file_line) do
     desc 'An optional value used to specify the line after which we will add any new lines. (Existing lines are added in place)'
   end
 
-  newparam(:before) do
+  newparam(:precede) do
     desc 'An optional value used to specify the line before which we will add any new lines. (Existing lines are added in place)'
   end
 

@@ -184,14 +184,14 @@ describe provider_class do
       end
     end
 
-    describe 'using before' do
+    describe 'using precede' do
       let :resource do
         Puppet::Type::File_line.new(
           {
-            :name  => 'foo',
-            :path  => @tmpfile,
-            :line  => 'inserted = line',
-            :before => '^foo1',
+            :name    => 'foo',
+            :path    => @tmpfile,
+            :line    => 'inserted = line',
+            :precede => '^foo1',
           }
         )
       end
@@ -200,20 +200,20 @@ describe provider_class do
         provider_class.new(resource)
       end
 
-      context 'with one line matching the before expression' do
+      context 'with one line matching the precede expression' do
         before :each do
           File.open(@tmpfile, 'w') do |fh|
             fh.write("foo1\nfoo = blah\nfoo2\nfoo = baz")
           end
         end
 
-        it 'inserts the specified line before the line matching the "before" expression' do
+        it 'inserts the specified line precede the line matching the "precede" expression' do
           provider.create
           File.read(@tmpfile).chomp.should eql("inserted = line\nfoo1\nfoo = blah\nfoo2\nfoo = baz")
         end
       end
 
-      context 'with two lines matching the before expression' do
+      context 'with two lines matching the precede expression' do
         before :each do
           File.open(@tmpfile, 'w') do |fh|
             fh.write("foo1\nfoo = blah\nfoo2\nfoo1\nfoo = baz")

@@ -19,9 +19,9 @@ describe Puppet::Type.type(:file_line) do
     file_line[:after] = '^foo.*$'
     file_line[:after].should == '^foo.*$'
   end
-  it 'should accept a before regex' do
-    file_line[:before] = '^foo.*$'
-    file_line[:before].should == '^foo.*$'
+  it 'should accept a precede regex' do
+    file_line[:precede] = '^foo.*$'
+    file_line[:precede].should == '^foo.*$'
   end
   it 'should not accept a match regex that does not match the specified line' do
     expect {

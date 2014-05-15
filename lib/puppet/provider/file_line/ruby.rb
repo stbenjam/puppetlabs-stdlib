@@ -10,8 +10,8 @@ Puppet::Type.type(:file_line).provide(:ruby) do
       handle_create_with_match
     elsif resource[:after]
       handle_create_with_position :after
-    elsif resource[:before]
-      handle_create_with_position :before
+    elsif resource[:precede]
+      handle_create_with_position :precede
     else
       append_line
     end
@@ -64,7 +64,7 @@ Puppet::Type.type(:file_line).provide(:ruby) do
           if regex.match(l) then
             fh.puts(resource[:line])
           end
-          fh.puts(l) if position == :before
+          fh.puts(l) if position == :precede
         end
       end
     when 0 # append the line to the end of the file
